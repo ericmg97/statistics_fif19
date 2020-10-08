@@ -4,12 +4,12 @@ library(lmtest)
 players <- read.csv('./players_19.csv')
 
 #Trabajar unicamente con jugadores del Inter de Milan
-barca_field_players <- subset(players,players$club == "Inter")
+inter_players <- subset(players,players$club == "Inter")
 
 #Eleccion de las variables a analizar
 vars_select = c("overall","age","potential")
 
-dataset = barca_field_players[vars_select]
+dataset = inter_players[vars_select]
 attach(dataset)
 
 # Calcular la matriz de correlacion
