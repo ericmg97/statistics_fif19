@@ -3,10 +3,8 @@ library(lmtest)
 # Cargar los datos de los jugadores
 players <- read.csv('./players_19.csv')
 
-#Trabajar unicamente con jugadores de campo del FCBarcelona
-barca_field_players <- subset(players, !is.na(players$pace) & players$club == "FC Barcelona")
-
-row.names(barca_field_players) <- barca_field_players$"short_name"
+#Trabajar unicamente con jugadores del Inter de Milan
+barca_field_players <- subset(players,players$club == "Inter")
 
 #Eleccion de las variables a analizar
 vars_select = c("overall","age","potential")
