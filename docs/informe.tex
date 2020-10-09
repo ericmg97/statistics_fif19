@@ -1,0 +1,272 @@
+%===================================================================================
+% PREÁMBULO
+%-----------------------------------------------------------------------------------
+\documentclass[a4paper,10pt,twocolumn]{article}
+
+%===================================================================================
+% Paquetes
+%-----------------------------------------------------------------------------------
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{informe}
+\usepackage{lipsum}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{algorithmic}
+\usepackage[pdftex]{hyperref}
+%-----------------------------------------------------------------------------------
+% Configuración
+%-----------------------------------------------------------------------------------
+\hypersetup{colorlinks,%
+	    citecolor=black,%
+	    filecolor=black,%
+	    linkcolor=black,%
+	    urlcolor=blue}
+
+%===================================================================================
+
+
+
+%===================================================================================
+% Presentacion
+%-----------------------------------------------------------------------------------
+% Título
+%-----------------------------------------------------------------------------------
+\title{Proyecto de Estad\'istica \\ 2da Fase}
+
+%-----------------------------------------------------------------------------------
+% Autores
+%-----------------------------------------------------------------------------------
+\author{\\
+	\name Oscar Luis Hernandez Solano \\ \addr Grupo C411 \\
+	\name Carlos Rafael Ortega Lezcano \\ \addr Grupo C411 \\
+	\name Harold Rosales Hernandez \\ \addr Grupo C411 }
+
+
+%-----------------------------------------------------------------------------------
+% Tutores
+%-----------------------------------------------------------------------------------
+\tutors{\\}
+
+%-----------------------------------------------------------------------------------
+% Headings
+%-----------------------------------------------------------------------------------
+%\jcematcomheading{\the\year}{1-\pageref{end}}{Carlos Rafael}
+
+%-----------------------------------------------------------------------------------
+%\ShortHeadings{Simulacio\'n basada en Eventos Discretos}{Carlos Rafael}
+%===================================================================================
+
+
+
+%===================================================================================
+% DOCUMENTO
+%-----------------------------------------------------------------------------------
+\begin{document}
+
+%-----------------------------------------------------------------------------------
+% NO BORRAR ESTA LINEA!
+%-----------------------------------------------------------------------------------
+\twocolumn[
+%-----------------------------------------------------------------------------------
+
+\maketitle
+
+%===================================================================================
+% Resumen y Abstract
+%-----------------------------------------------------------------------------------
+\selectlanguage{spanish} % Para producir el documento en Español
+
+%-----------------------------------------------------------------------------------
+% Palabras clave
+%-----------------------------------------------------------------------------------
+%\begin{keywords}
+%	Separadas,
+%	Por,
+%	Comas.
+%\end{keywords}
+
+%-----------------------------------------------------------------------------------
+% Temas
+%-----------------------------------------------------------------------------------
+%\begin{topics}
+%	Tema, Subtema.
+%\end{topics}
+
+
+%-----------------------------------------------------------------------------------
+% NO BORRAR ESTAS LINEAS!
+%-----------------------------------------------------------------------------------
+\vspace{0.8cm}
+]
+%-----------------------------------------------------------------------------------
+
+
+%===================================================================================
+
+%===================================================================================
+% Introducción
+%-----------------------------------------------------------------------------------
+\section*{Intro}\label{sec:intro}
+%-----------------------------------------------------------------------------------
+
+\lipsum[1]
+
+\subsection*{Regresi\'on M\'ultiple}
+
+En primer lugar se analiza la relaci\'on entre las variables mediante \verb|cor(dt)|, resultando:
+
+\begin{figure}[h]
+	\includegraphics[scale=0.28]{./imgs/cor.png}
+\end{figure}
+
+Plantearemos un modelo que busca estimar el valor de la variable (\textit{overall}) mediante el resto de las variables, al observar la matriz de correlaci\'on descartamos las variables (\textit{height\_cm} y \textit{skill\_moves}), por tanto el modelo se escribe de la siguiente forma:
+
+\begin{align*}
+	overall = \beta_0 + potential \beta_1 + age \beta_2 + irep \beta_3 + e
+\end{align*}
+
+Usando \verb|R| para determinar el valor de los $\beta_j$ se obtiene la salida mostrada en la Figura 1
+
+\begin{figure}[h]
+	\includegraphics[scale=0.6]{./imgs/bjs.png}
+\end{figure}
+
+Sustituyendo los valores obtenidos resulta el modelo:
+
+\begin{align*}
+	\widehat{overall} = 0.92 potential + 0.95 age + 0.62 irep - 23.91
+\end{align*}
+
+\textbf{Coeficientes}: Los coeficientes son significativos al $0\%$ inclusive el intercepto lo que es bueno para el modelo, los valores de $Pr(>|t|)$ son menores por lo tanto no existe variable que no aporte informaci\'on al modelo
+
+\textbf{Adjusted R-Square}: El valor del R-Cuadrado es 0.8565 por lo tanto el modelo se considera bastante bueno en cuanto a la realizaci\'on de predicciones
+
+\textbf{F-Statistic}: Su valor nos indica la existencia de al menos una variable que esta siendo significativa para el modelo
+
+Ahora pasemos a analizar los residuos para el modelo:
+
+\textbf{Analizando los Residuos}:
+
+\begin{enumerate}
+	\item[1.] \textbf{La media de los errores es 0 y la suma de los errores es 0}:\\
+	Empleando \verb|R| se obtiene:
+	\begin{verbatim}
+	> mean(model$residuals)
+	[1] -3.006259e-15
+	> sum(model$residuals)
+	[1] -5.330704e-11
+	\end{verbatim}
+	
+	\item[2.] \textbf{Errores normalmente distribuidos}:\\
+	Se muestra el histograma y el Normal Q-Q Plot ,en el histograma se puede apreciar un parecido a una distribuci\'on normal, pero al observar el QQ Plot se aprecia como la mayoria de los puntos de residuo se encuentran sobre la recta, por lo tanto se asume una normalidad en los errores del modelo (\textbf{Figura 2})
+	
+	\begin{figure}[h]
+		\includegraphics[scale=0.375]{./imgs/hist.jpeg}
+		\includegraphics[scale=0.375]{./imgs/qq.jpeg}
+		\caption{}
+	\end{figure}
+	
+	\item [3.] \textbf{Independencia de los residuos}:\\
+	Para la prueba de independencia se emplea la prueba Durbin-Watson:
+	
+	\begin{verbatim}
+	> dwtest(model)
+	
+	Durbin-Watson test
+	
+	data:  model
+	DW = 0.64356, p-value < 2.2e-16
+	alternative hypothesis: true 
+	autocorrelation is greater than 0
+	\end{verbatim}
+	
+	Como el p-value no es mayor que 0.05 se rechaza la hipotesis nula por tanto no podemos afirmar que los errores sean independientes, el incumplimiento de este residuo hace que nuestro modelo no sea el id\'oneo para estimar valores de la variable \textit{overall}
+	
+	\item[4.] \textbf{La varianza de los errores es constante (Homocedasticidad)}:\\
+	
+	Se puede observar en el gr\'afico que se cumple la homocedasticidad:
+	
+	\begin{figure}[h]
+		\includegraphics[scale=0.4]{./imgs/var.jpeg}
+	\end{figure}
+
+\end{enumerate}
+
+
+
+\subsection*{ACP}
+
+Primeramente podemos observar que la matriz de correlaci\'on a simple vista no nos muestra la relaci\'on que se establece entre las variables por tanto empleamos la funci\'on \verb|synnum| a la matriz obteniendo:
+\newline
+\begin{verbatim}
+> symnum(tp)
+                         a o p s h i
+age                      1          
+overall                  . 1        
+potential                  , 1      
+skill_moves                    1    
+height_cm                      . 1  
+international_reputation   . .     1
+\end{verbatim}
+
+Se puede observar que no existe una relaci\'on entre las variables por lo tanto pasaremos a reducir dimensi\'on. Para esto busquemos las componentes principales:
+
+\begin{figure}[h]
+	\includegraphics[scale=0.53]{./imgs/comps.png}
+\end{figure}
+
+Para la selecci\'on de las componentes principales pasemos a graficar los valores propios asociados a cada una:
+
+\begin{figure}[h]
+	\includegraphics[scale=0.375]{./imgs/val_prop.jpeg}
+\end{figure}
+
+Para la selecci\'on de las componentes principales empleamos la proporci\'on acumulativa y nos quedamos con aquellas que su porciento acumulatico es menor que 0.70 y la primera que supera este valor, seg\'un lo visto en el criterio del porcentaje, adem\'as si observamos detenidamente los valores propios las tres primeras componentes tienen valor propio mayor a 1 por tanto si hubieramos seleccionado el criterio de Kaiser obtendriamos las 3 primeras componentes como principales.\\
+Los valores propios de las 3 primeras componentes son los siguientes:
+
+\begin{figure}[h]
+	\includegraphics[scale=0.5]{./imgs/main.png}
+\end{figure}
+
+Ahora pasemos a analizar cuales variables son importantes en cada componente y en que medida, para esto tomamos por cada componente el mayor valor propio $\lambda_i$, dividimos entre 2 y todo valor propio cuyo valor absoluto este por encima de $\lambda_i / 2$, la variable asociada a este conformar\'a la componente.
+
+\begin{enumerate}
+	\item[] \textbf{PC1} ($\lambda_{\max} = 0.61$): Esta componente esta caraterizada por una muestra de jugadores de bajo \textit{overall}, con poco desarrollo en el juego (\textit{potential}) y de baja reputaci\'on internacional, o sea no ser\'an convocados a la selecci\'on con mucha frecuencia
+	
+	\item[] \textbf{PC2} ($\lambda_{\max} = 0.65$): Esta componente esta caracterizada por una muestra de
+	jugadores j\'ovenes con buenas habilidades en el dominio del bal\'on, adem\'as el valor negativo en la variable altura puede asociarse a jugadores del mediocampo, en su mayoria en lugar de defensores y delanteros centros
+	
+	\item[] \textbf{PC3} ($\lambda_{\max} = 0.72$): Esta componente esta caracteriza por una muestra de 
+	jugadores j\'ovenes con gran potencial (a medida que avancen las temporadas su promedio y valor aumentar\'a en gran medida). Esta componente resulta interesante porque describe a aquellos jugadores que podr\'iamos elegir en el juego para el pasar las temporadas sea de gran valor para nuestro equipo 
+\end{enumerate} 
+
+La figura siguiente muesta los biplot para las 2 primeras componentes (PC1, PC2) y para las dos \'ultimas (PC2, PC3):
+
+\begin{figure}[h]
+	\verb|> biplot(acp, choices = 1:2)|
+	
+	\includegraphics[scale=0.4]{./imgs/biplotp1p2.jpeg}
+	\verb|> biplot(acp, choices = 2:3)|
+	
+	\includegraphics[scale=0.4]{./imgs/biplotp2p3.jpeg}
+\end{figure}
+
+\section*{Development}\label{sec:dev}
+  
+\lipsum[6-8]
+
+\section*{Conclussion}\label{sec:con}
+
+\lipsum[9-11]
+
+\begin{thebibliography}{9}
+	
+\end{thebibliography}
+
+\label{end}
+
+\end{document}
+
+%===================================================================================
