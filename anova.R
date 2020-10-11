@@ -3,25 +3,26 @@ library(lmtest)
 # Cargar los datos de los jugadores
 players <- read.csv('./players_19.csv')
 
-#Trabajar con los jugadores de los clubes: Rayo Vallecano, Manchester City, Herta BSC, VFL Wolfsburg
-players_data <- subset(players,(players$club == "FC Barcelona" | players$club == "Valencia CF" | players$club == "Real Sociedad") & !is.na(players$passing))
+#Trabajar con los jugadores de campo Argentinos con edades de 20, 25 y 30 años
+players_data <- subset(players,(players$age == 20 | players$age == 25 | players$age == 30) & !is.na(players$physic) & players$nationality == "Argentina")
 
-#Eleccion de las variables a analizar
-vars_select = c("club","passing")
+#Analizar como se comporta el fisico de los jugadores con respecto a la edad
+vars_select = c("age","physic")
 
 dataset = players_data[vars_select]
 
-club_passing = dataset[order(dataset$club),]
+#Ordenar los jugadores por edades
+age_physic = dataset[order(dataset$age),]
 
 
-df = data.frame(club_passing$club,club_passing$passing)
+df = data.frame(age_physic$age,age_physic$physic)
 
-boxplot(club_passing$passing ~ club_passing$club, data=df)
+boxplot(age_physic$physic ~ age_physic$age, data=df)
 
-passing_anova <- aov(club_passing$passing ~ club_passing$club, data = df)
-summary(passing_anova)
+physic_anova <- aov(age_physic$physic ~ age_physic$age, data = df)
+summary(physic_anova)
 
-anova_residuals <- passing_anova$residuals
+anova_residuals <- physic_anova$residuals
 
 #1. Los 𝑒𝑖𝑗 siguen una distribución normal con media cero.
 #2. Los 𝑒𝑖𝑗 son independientes entre sí.
@@ -35,7 +36,7 @@ plot(anova_residuals)
 
 shapiro.test(anova_residuals)
 
-bartlett.test(anova_residuals, df$club_passing.club)
+bartlett.test(anova_residuals, df$age_physic.age)
 
-dwtest(passing_anova)
+dwtest(physic_anova)
 
