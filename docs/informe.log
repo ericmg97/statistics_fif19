@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2020.10.9)  11 OCT 2020 02:06
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2020.10.9)  11 OCT 2020 02:10
 entering extended mode
 **informe.tex
 (C:\Users\Sala\Documents\GitHub\statistics_fifa19\docs\informe.tex
@@ -918,16 +918,16 @@ File: ./imgs/acp_biplot.png Graphic file (type png)
 <use ./imgs/acp_biplot.png>
 Package pdftex.def Info: ./imgs/acp_biplot.png used on input line 300.
 (pdftex.def)             Requested size: 214.09608pt x 212.89159pt.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 307.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 305.
  [4
 
  <C:/Users/Sala/Documents/GitHub/statistics_fifa19/docs/imgs/acp_vp.jpg> <C:/Us
 ers/Sala/Documents/GitHub/statistics_fifa19/docs/imgs/acp_biplot.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 307.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 305.
 
 (C:\Users\Sala\Documents\GitHub\statistics_fifa19\docs\informe.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 307.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 307.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 305.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 305.
 Package rerunfilecheck Info: File `informe.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
