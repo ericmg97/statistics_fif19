@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2020.10.9)  11 OCT 2020 02:10
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2020.10.9)  11 OCT 2020 02:15
 entering extended mode
 **informe.tex
 (C:\Users\Sala\Documents\GitHub\statistics_fifa19\docs\informe.tex
@@ -934,7 +934,7 @@ Package rerunfilecheck Info: File `informe.out' has not changed.
 Here is how much of TeX's memory you used:
  8795 strings out of 494045
  124440 string characters out of 3145972
- 312789 words of memory out of 3000000
+ 312791 words of memory out of 3000000
  11938 multiletter control sequences out of 15000+200000
  8323 words of font info for 32 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
@@ -951,7 +951,7 @@ x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files (x8
 6)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti9.pfb><C:/Program Files (x86)/
 MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Program Files (x86)/Mi
 KTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on informe.pdf (4 pages, 617041 bytes).
+Output written on informe.pdf (4 pages, 617300 bytes).
 PDF statistics:
  111 PDF objects out of 1000 (max. 8388607)
  19 named destinations out of 1000 (max. 500000)
