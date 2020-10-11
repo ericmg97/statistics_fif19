@@ -135,10 +135,10 @@ El modelo elegido buscará analizar la relación de la variable (\textit{overall
 overall = \beta_0 + potential \beta_1 + age \beta_2 + e
 \end{align*}
 
-Para investigar los resultados de la regresión y determinar el valor de los $\beta_j$ se utilizó la función "\verb|summary(regression_model)|" de \verb|R| y se obtuvo la salida mostrada en la Figura 1\\\\\\
+Para investigar los resultados de la regresión y determinar el valor de los $\beta_j$ se utilizó la función "\verb|summary(regression_model)|" de \verb|R| y se obtuvo la salida mostrada en la Figura 1\\
 
 \begin{figure}[h]
-	\includegraphics[scale=0.7]{./imgs/reg_model.jpg}
+	\includegraphics[scale=0.65]{./imgs/reg_model.jpg}
 \end{figure}
 
 Sustituyendo los valores obtenidos resulta el modelo:
@@ -149,11 +149,10 @@ Sustituyendo los valores obtenidos resulta el modelo:
 
 \textbf{Coeficientes}: Los coeficientes son significativos al $0\%$ inclusive el intercepto lo que es bueno para el modelo, los valores de $Pr(>|t|)$ son menores que 0.05 por lo tanto todas las variables aportan información al modelo.\\
 
-\textbf{Adjusted R-Square}: El valor del R-Cuadrado es 0.9604 por lo tanto el modelo se considera muy bueno en cuanto a la realizaci\'on de predicciones\\
+\textbf{Adjusted R-Square}: El valor del R-Cuadrado es 0.9604 por lo tanto el modelo se considera muy bueno en cuanto a la realizaci\'on de predicciones
 
-\textbf{F-Statistic}: Su valor menor que 0.05 nos indica la existencia de al menos una variable que esta siendo significativa para el modelo
+\textbf{F-Statistic}: Su valor menor que 0.05 nos indica la existencia de al menos una variable que esta siendo significativa para el modelo\\
 
-\newpage
 
 \textbf{Analizando los Residuos}:
 
@@ -163,8 +162,9 @@ Sustituyendo los valores obtenidos resulta el modelo:
 \begin{figure}[h]
 	\includegraphics[scale=0.8]{./imgs/reg_1.jpg}
 \end{figure}
+
 	
-	\item[2.] \textbf{Errores normalmente distribuidos}:\\
+	\item[2.] \textbf{Errores normalmente distribuidos}:
 	Se muestra el histograma y el Normal Q-Q Plot ,en el histograma se puede apreciar un parecido a una distribuci\'on normal y al observar el QQ Plot se aprecia como la mayoría de los puntos de residuo se encuentran sobre la recta, por lo tanto se asume una normalidad en los errores del modelo (\textbf{Figura 2})
 	
 	\begin{figure}[h]
@@ -173,25 +173,83 @@ Sustituyendo los valores obtenidos resulta el modelo:
 		\caption{}
 	\end{figure}
 	
-	\item [3.] \textbf{Independencia de los residuos}:\\
+	\item [3.] \textbf{Independencia de los residuos}:
 	Para la prueba de independencia se emplea la prueba Durbin-Watson:
 	
 	\begin{figure}[h]
 		\includegraphics[width=0.5\textwidth]{./imgs/reg_3.jpg}
 	\end{figure}
 	
-	Como el p-value es mayor que 0.05 no se puede rechazar la hipótesis nula, por lo tanto se puede afirmar que los errores son independientes. \\
+	Como el p-value es mayor que 0.05 no se puede rechazar la hipótesis nula, por lo tanto se puede afirmar que los errores son independientes. 
 	
-	\item[4.] \textbf{La varianza de los errores es constante (Homocedasticidad)}:\\
+	\item[4.] \textbf{La varianza de los errores es constante (Homocedasticidad)}:
 	
 	Se puede observar en el gráfico el cumplimiento de la homocedasticidad:
 	
-	\begin{figure}[h]
-		\includegraphics[scale=0.4]{./imgs/reg_4.jpg}
-	\end{figure}
+	
+	\includegraphics[scale=0.5]{./imgs/reg_4.jpg}
+
 	
 \end{enumerate}
 
+\subsection*{ANOVA}
+
+En este apartado se trabajará sobre el subconjunto de jugadores de campo del FIFA19 nacidos en Argentina con edades de 20, 25 y 30 años (factor edad), con el objetivo de reconocer como el físico de los jugadores varía con respecto a su edad.\\
+Luego de reorganizar los datos para un correcto análisis podemos comparar las medidas de los 3 niveles del factor "edad" realizando un gráfico de cajas con las medias de cada nivel:
+
+\begin{figure}[h]
+	\includegraphics[scale=0.55]{./imgs/anova_boxplot.jpg}
+\end{figure}
+
+El siguiente paso sería realizar el análisis de varianza, para ver si la prueba de hipótesis es válida. En este
+caso el análisis de varianza es el siguiente:
+
+\begin{figure}[h]
+	\includegraphics[scale=0.55]{./imgs/anova_summary.jpg}
+\end{figure}
+
+Como p = 0.0000 es menor que la significación prefijada $\alpha$ = 0.05, se rechaza $H_{0}$ y se acepta que al menos un grupo de futbolistas de cierta edad, tiene un físico promedio diferente. 
+
+Por último, es necesario verificar que se cumplen los supuestos del modelo:
+\begin{enumerate}
+	\item Los $e_{ij}$ siguen una distribución normal con media cero.
+	\item Los $e_{ij}$ son independientes entre sí.
+	\item Los residuos de cada tratamiento tienen la misma varianza $\sigma^{2}$
+\end{enumerate}
+
+\includegraphics[scale=0.5]{./imgs/anova_residuals.jpg}
+\includegraphics[scale=0.5]{./imgs/anova_qq.jpg}
+\includegraphics[scale=0.5]{./imgs/anova_hist.jpg}
+
+Como se puede observar en el gráfico estandarizado de residuos, tienen varianza constante, el qq-plot y el histograma de residuos
+muestran un comportamiento de forma normal, sin embargo, se realizarán las pruebas Shapiro-Wilcox, Bartlet y DurbinWatson para constatar el cumplimiento de los supuestos.
+
+\begin{enumerate}
+	\item Test de Shapiro-Wilcox
+	
+	\begin{figure}[h]
+		\includegraphics[scale=0.7]{./imgs/anova_shapiro.jpg}
+	\end{figure}
+	
+	El test de Shapiro-Wilcox no es significativo (p = 0.057 $>$ 0.05), no podemos rechazar $H_{0}$ por lo que se puede confirmar la hipótesis de normalidad en los residuos.
+	
+	\item Test de Bartlett
+	
+	\begin{figure}[h]
+		\includegraphics[scale=0.7]{./imgs/anova_bartlett.jpg}
+	\end{figure}
+	
+	El test de Bartlett no es significativo (p = 0.97 $>$ 0.05), no podemos rechazar $H_{0}$ por lo que se puede confirmar la hipótesis de homogeneidad de las varianzas.
+	
+	\item Test de Durbin-Watson
+	
+	\begin{figure}[h]
+		\includegraphics[scale=0.63]{./imgs/anova_dw.jpg}
+	\end{figure}
+	
+	El test de Durbin-Watson no es significativo (p = 0.67 $>$ 0.05), no podemos rechazar $H_{0}$ por lo que se puede confirmar la hipótesis de independencia de los errores.
+	
+\end{enumerate}
 
 \subsection*{ACP}
 
@@ -208,51 +266,39 @@ Se puede observar que no existe una relación entre las variables por lo tanto s
 	\includegraphics[scale=0.6]{./imgs/acp_summary.jpg}
 \end{figure}
 
-Para la selección de las componentes principales se procede a graficar los valores propios asociados a cada una ellas:
+Para la selección de las componentes principales se emplea la proporción acumulativa, la primera componente PC1 es 0.61364 , que solo explicaría un 61\% por lo que se necesita al menos otra componente para tener un valor mayor al 70\%. Si se incluye PC2 se alcanza un 86\%. De acuerdo con el criterio de Kaiser se tiene que las dos componentes con valores propios superiores a 1 son la primera y la segunda. Por lo que PC1 y PC2 son las componentes principales a elegir. Otra forma de corroborar dicha elección sería graficar todas las componentes principales como se muestra en la siguiente gráfica:
 
 \begin{figure}[h]
-	\includegraphics[scale=0.1]{./imgs/acp_vp.jpg}
+	\includegraphics[scale=0.55]{./imgs/acp_plot.jpg}
+\end{figure}
+
+Para interpretar los datos se debe calcular la matriz de valores propios y así se sabrá que variable es importante para cada componente y en qué medida:
+
+\begin{figure}[h]
+	\includegraphics[width=0.5\textwidth]{./imgs/acp_vp.jpg}
 \end{figure}
 
 
-Para la selecci\'on de las componentes principales empleamos la proporci\'on acumulativa y nos quedamos con aquellas que su porciento acumulatico es menor que 0.70 y la primera que supera este valor, seg\'un lo visto en el criterio del porcentaje, adem\'as si observamos detenidamente los valores propios las tres primeras componentes tienen valor propio mayor a 1 por tanto si hubieramos seleccionado el criterio de Kaiser obtendriamos las 3 primeras componentes como principales.\\
-Los valores propios de las 3 primeras componentes son los siguientes:
-
-\begin{figure}[h]
-	\includegraphics[scale=0.5]{./imgs/main.png}
-\end{figure}
-
-
-Ahora pasemos a analizar cuales variables son importantes en cada componente y en que medida, para esto tomamos por cada componente el mayor valor propio $\lambda_i$, dividimos entre 2 y todo valor propio cuyo valor absoluto este por encima de $\lambda_i / 2$, la variable asociada a este conformar\'a la componente.
+Para esto se analiza por cada componente el mayor valor propio $\lambda_i$, este se divide entre 2 y la variable asociada a cada valor propio cuyo valor absoluto este por encima de $\lambda_i / 2$, pertenecerá a la componente.
 
 \begin{enumerate}
-	\item[] \textbf{PC1} ($\lambda_{\max} = 0.61$): Esta componente esta caraterizada por una muestra de jugadores de bajo \textit{overall}, con poco desarrollo en el juego (\textit{potential}) y de baja reputaci\'on internacional, o sea no ser\'an convocados a la selecci\'on con mucha frecuencia
+	\item[] \textbf{PC1} ($\lambda_{\max} = 0.52$): Esta componente esta caraterizada por una muestra de jugadores con estadísticas ofensivas bajas y buenas capacidades defensivas. (Defensas)
 	
-	\item[] \textbf{PC2} ($\lambda_{\max} = 0.65$): Esta componente esta caracterizada por una muestra de
-	jugadores j\'ovenes con buenas habilidades en el dominio del bal\'on, adem\'as el valor negativo en la variable altura puede asociarse a jugadores del mediocampo, en su mayoria en lugar de defensores y delanteros centros
+	\item[] \textbf{PC2} ($\lambda_{\max} = 0.73$): Esta componente esta caracterizada por una muestra de jugadores con poco ritmo pero buenos pasadores y disparando al arco. (Delantero)
 	
-	\item[] \textbf{PC3} ($\lambda_{\max} = 0.72$): Esta componente esta caracteriza por una muestra de 
-	jugadores j\'ovenes con gran potencial (a medida que avancen las temporadas su promedio y valor aumentar\'a en gran medida). Esta componente resulta interesante porque describe a aquellos jugadores que podr\'iamos elegir en el juego para el pasar las temporadas sea de gran valor para nuestro equipo 
+	\item[] \textbf{PC3} ($\lambda_{\max} = 0.70$): Esta componente esta caracteriza por una muestra de	jugadores con buen ritmo, buenas capacidades defensivas y pasando el balón. (Medio Centro Defensivo) 
+	
+	\item[] \textbf{PC4} ($\lambda_{\max} = 0.68$): Esta componente esta caracteriza por una muestra de	jugadores con buenas habilidades en el dominio del balón, con poco ritmo y no muy finos en los disparos. (Medio Centro)
+	
+	\item[] \textbf{PC4} ($\lambda_{\max} = 0.65$): Esta componente esta caracteriza por una muestra de	jugadores con poca habilidad en el dominio del balón y en el disparo pero buenos pasadores. (Medio Ofensivo) 
+	
 \end{enumerate} 
 
-La figura siguiente muesta los biplot para las 2 primeras componentes (PC1, PC2) y para las dos \'ultimas (PC2, PC3):
+La figura siguiente muestra un biplot para las 2 primeras componentes (PC1, PC2) con la representación de los jugadores según sus habilidades:
 
 \begin{figure}[h]
-	\verb|> biplot(acp, choices = 1:2)|
-	
-	\includegraphics[scale=0.4]{./imgs/biplotp1p2.jpeg}
-	\verb|> biplot(acp, choices = 2:3)|
-	
-	\includegraphics[scale=0.4]{./imgs/biplotp2p3.jpeg}
+	\includegraphics[scale=0.4]{./imgs/acp_biplot.png}
 \end{figure}
-
-\section*{Conclussion}\label{sec:con}
-
-\lipsum[9-11]
-
-\begin{thebibliography}{9}
-	
-\end{thebibliography}
 
 \label{end}
 

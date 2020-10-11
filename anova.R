@@ -19,20 +19,22 @@ df = data.frame(age_physic$age,age_physic$physic)
 
 boxplot(age_physic$physic ~ age_physic$age, data=df)
 
+#Analisis de Varianza
 physic_anova <- aov(age_physic$physic ~ age_physic$age, data = df)
 summary(physic_anova)
 
 anova_residuals <- physic_anova$residuals
 
-#1. Los 𝑒𝑖𝑗 siguen una distribución normal con media cero.
-#2. Los 𝑒𝑖𝑗 son independientes entre sí.
-#3. Los residuos de cada tratamiento tienen la misma varianza 𝜎
- 
-
-
+#Verificar que se cumplen los supuestos del modelo (Graficamente)
 hist(anova_residuals)
 qqnorm(anova_residuals); qqline(anova_residuals, col=2)
-plot(anova_residuals)
+
+plot(anova_residuals, ylab = 'Studentized residuals',
+     xlab = 'Predictions',
+     main = 'Anova Studentized residuals'); qqline(0, col=3)
+
+
+#Verificar que se cumplen los supuestos del modelo
 
 shapiro.test(anova_residuals)
 
