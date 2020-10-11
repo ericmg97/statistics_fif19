@@ -208,7 +208,7 @@ caso el análisis de varianza es el siguiente:
 	\includegraphics[scale=0.55]{./imgs/anova_summary.jpg}
 \end{figure}
 
-Como p = 0.0000 es menor que la significación prefijada $\alpha$ = 0.05, se rechaza $H_{0}$ y se acepta que al menos un grupo de futbolistas de cierta edad, tiene un físico promedio diferente. 
+Como p-value = 0.0000 es menor que la significación prefijada $\alpha$ = 0.05, se rechaza $H_{0}$ y se acepta que al menos un grupo de futbolistas de cierta edad, tiene un físico promedio diferente. 
 
 Por último, es necesario verificar que se cumplen los supuestos del modelo:
 \begin{enumerate}
@@ -231,7 +231,7 @@ muestran un comportamiento de forma normal, sin embargo, se realizarán las prue
 		\includegraphics[scale=0.7]{./imgs/anova_shapiro.jpg}
 	\end{figure}
 	
-	El test de Shapiro-Wilcox no es significativo (p = 0.057 $>$ 0.05), no podemos rechazar $H_{0}$ por lo que se puede confirmar la hipótesis de normalidad en los residuos.
+	El test de Shapiro-Wilcox no es significativo (p-value = 0.057 $>$ 0.05), no podemos rechazar $H_{0}$ por lo que se puede confirmar la hipótesis de normalidad en los residuos.
 	
 	\item Test de Bartlett
 	
@@ -239,7 +239,7 @@ muestran un comportamiento de forma normal, sin embargo, se realizarán las prue
 		\includegraphics[scale=0.7]{./imgs/anova_bartlett.jpg}
 	\end{figure}
 	
-	El test de Bartlett no es significativo (p = 0.97 $>$ 0.05), no podemos rechazar $H_{0}$ por lo que se puede confirmar la hipótesis de homogeneidad de las varianzas.
+	El test de Bartlett no es significativo (p-value = 0.97 $>$ 0.05), no podemos rechazar $H_{0}$ por lo que se puede confirmar la hipótesis de homogeneidad de las varianzas.
 	
 	\item Test de Durbin-Watson
 	
@@ -247,7 +247,7 @@ muestran un comportamiento de forma normal, sin embargo, se realizarán las prue
 		\includegraphics[scale=0.63]{./imgs/anova_dw.jpg}
 	\end{figure}
 	
-	El test de Durbin-Watson no es significativo (p = 0.67 $>$ 0.05), no podemos rechazar $H_{0}$ por lo que se puede confirmar la hipótesis de independencia de los errores.
+	El test de Durbin-Watson no es significativo (p-value = 0.67 $>$ 0.05), no podemos rechazar $H_{0}$ por lo que se puede confirmar la hipótesis de independencia de los errores.
 	
 \end{enumerate}
 
