@@ -122,7 +122,7 @@ En este trabajo se realizará un estudio de los datos de los jugadores del FIFA1
   
 \subsection*{Regresión Múltiple}
 
-En este apartado se trabajará sobre el subconjunto de jugadores de campo del FIFA19 que pertenecen al club Inter de Milán.
+En este apartado se trabajará sobre el subconjunto de jugadores de campo del FIFA19 que pertenecen al club Inter de Milán. Con el objetivo de analizar como se evoluciona el promedio de un jugador con respecto a su edad y potencial.\\
 En primer lugar se analiza la relación entre las variables utilizando la matriz de correlación "\verb|cor(dataset)|", resultando:
 
 \begin{figure}[h]
@@ -149,10 +149,11 @@ Sustituyendo los valores obtenidos resulta el modelo:
 
 \textbf{Coeficientes}: Los coeficientes son significativos al $0\%$ inclusive el intercepto lo que es bueno para el modelo, los valores de $Pr(>|t|)$ son menores que 0.05 por lo tanto todas las variables aportan información al modelo.\\
 
-\textbf{Adjusted R-Square}: El valor del R-Cuadrado es 0.9604 por lo tanto el modelo se considera muy bueno en cuanto a la realizaci\'on de predicciones
+\textbf{Adjusted R-Square}: El valor del R-Cuadrado es 0.9604 por lo tanto el modelo se considera muy bueno en cuanto a la realizaci\'on de predicciones\\
 
 \textbf{F-Statistic}: Su valor menor que 0.05 nos indica la existencia de al menos una variable que esta siendo significativa para el modelo\\
 
+\newpage
 
 \textbf{Analizando los Residuos}:
 
@@ -236,7 +237,7 @@ muestran un comportamiento de forma normal, sin embargo, se realizarán las prue
 	\item Test de Bartlett
 	
 	\begin{figure}[h]
-		\includegraphics[scale=0.7]{./imgs/anova_bartlett.jpg}
+		\includegraphics[scale=0.65]{./imgs/anova_bartlett.jpg}
 	\end{figure}
 	
 	El test de Bartlett no es significativo (p-value = 0.97 $>$ 0.05), no podemos rechazar $H_{0}$ por lo que se puede confirmar la hipótesis de homogeneidad de las varianzas.
@@ -268,6 +269,8 @@ Se puede observar que no existe una relación entre las variables por lo tanto s
 
 Para la selección de las componentes principales se emplea la proporción acumulativa, la primera componente PC1 es 0.61364 , que solo explicaría un 61\% por lo que se necesita al menos otra componente para tener un valor mayor al 70\%. Si se incluye PC2 se alcanza un 86\%. De acuerdo con el criterio de Kaiser se tiene que las dos componentes con valores propios superiores a 1 son la primera y la segunda. Por lo que PC1 y PC2 son las componentes principales a elegir. Otra forma de corroborar dicha elección sería graficar todas las componentes principales como se muestra en la siguiente gráfica:
 
+\newpage
+
 \begin{figure}[h]
 	\includegraphics[scale=0.55]{./imgs/acp_plot.jpg}
 \end{figure}
@@ -290,7 +293,7 @@ Para esto se analiza por cada componente el mayor valor propio $\lambda_i$, este
 	
 	\item[] \textbf{PC4} ($\lambda_{\max} = 0.68$): Esta componente esta caracteriza por una muestra de	jugadores con buenas habilidades en el dominio del balón, con poco ritmo y no muy finos en los disparos. (Medio Centro)
 	
-	\item[] \textbf{PC4} ($\lambda_{\max} = 0.65$): Esta componente esta caracteriza por una muestra de	jugadores con poca habilidad en el dominio del balón y en el disparo pero buenos pasadores. (Medio Ofensivo) 
+	\item[] \textbf{PC5} ($\lambda_{\max} = 0.65$): Esta componente esta caracteriza por una muestra de	jugadores con poca habilidad en el dominio del balón y en el disparo pero buenos pasadores. (Medio Ofensivo) 
 	
 \end{enumerate} 
 
