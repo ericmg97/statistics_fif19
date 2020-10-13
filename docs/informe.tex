@@ -127,6 +127,7 @@ En primer lugar se analiza la relación entre las variables utilizando la matriz
 
 \begin{figure}[h]
 	\includegraphics[scale=0.86]{./imgs/reg_correlation.jpg}
+	\caption{Matriz de Correlación}
 \end{figure}
 
 El modelo elegido buscará analizar la relación de la variable (\textit{overall}) con las variables (\textit{age}) y (\textit{potential}), quedando representado de la siguiente forma:
@@ -135,10 +136,11 @@ El modelo elegido buscará analizar la relación de la variable (\textit{overall
 overall = \beta_0 + potential \beta_1 + age \beta_2 + e
 \end{align*}
 
-Para investigar los resultados de la regresión y determinar el valor de los $\beta_j$ se utilizó la función "\verb|summary(regression_model)|" de \verb|R| y se obtuvo la salida mostrada en la Figura 1\\
+Para investigar los resultados de la regresión y determinar el valor de los $\beta_j$ se utilizó la función "\verb|summary(regression_model)|" de \verb|R| y se obtuvo la salida mostrada en la Figura 2\\
 
 \begin{figure}[h]
 	\includegraphics[scale=0.65]{./imgs/reg_model.jpg}
+	\caption{Salida del Modelo de Regresión Múltiple}
 \end{figure}
 
 Sustituyendo los valores obtenidos resulta el modelo:
@@ -153,7 +155,7 @@ Sustituyendo los valores obtenidos resulta el modelo:
 
 \textbf{F-Statistic}: Su valor menor que 0.05 nos indica la existencia de al menos una variable que esta siendo significativa para el modelo\\
 
-\newpage
+
 
 \textbf{Analizando los Residuos}:
 
@@ -162,6 +164,7 @@ Sustituyendo los valores obtenidos resulta el modelo:
 
 \begin{figure}[h]
 	\includegraphics[scale=0.8]{./imgs/reg_1.jpg}
+	\caption{Supuesto 1}
 \end{figure}
 
 	
@@ -171,7 +174,7 @@ Sustituyendo los valores obtenidos resulta el modelo:
 	\begin{figure}[h]
 		\includegraphics[scale=0.5]{./imgs/reg_2_hist.jpg}
 		\includegraphics[scale=0.5]{./imgs/reg_2_qq.jpg}
-		\caption{}
+		\caption{Salida de los Residuos del Modelo de Regresión Múltiple}
 	\end{figure}
 	
 	\item [3.] \textbf{Independencia de los residuos}:
@@ -179,6 +182,7 @@ Sustituyendo los valores obtenidos resulta el modelo:
 	
 	\begin{figure}[h]
 		\includegraphics[width=0.5\textwidth]{./imgs/reg_3.jpg}
+		\caption{Prueba Durbin-Watson}
 	\end{figure}
 	
 	Como el p-value es mayor que 0.05 no se puede rechazar la hipótesis nula, por lo tanto se puede afirmar que los errores son independientes. 
@@ -187,9 +191,10 @@ Sustituyendo los valores obtenidos resulta el modelo:
 	
 	Se puede observar en el gráfico el cumplimiento de la homocedasticidad:
 	
-	
-	\includegraphics[scale=0.5]{./imgs/reg_4.jpg}
-
+	\begin{figure}[h]
+		\includegraphics[scale=0.5]{./imgs/reg_4.jpg}
+		\caption{Supuesto 4 - Homocedasticidad}
+	\end{figure}
 	
 \end{enumerate}
 
@@ -200,13 +205,14 @@ Luego de reorganizar los datos para un correcto análisis podemos comparar las m
 
 \begin{figure}[h]
 	\includegraphics[scale=0.55]{./imgs/anova_boxplot.jpg}
+	\caption{Boxplot de los niveles}
 \end{figure}
 
-El siguiente paso sería realizar el análisis de varianza, para ver si la prueba de hipótesis es válida. En este
-caso el análisis de varianza es el siguiente:
+El siguiente paso sería realizar el análisis de varianza, para ver si la prueba de hipótesis es válida. En este caso el análisis de varianza es el siguiente:
 
 \begin{figure}[h]
 	\includegraphics[scale=0.55]{./imgs/anova_summary.jpg}
+	\caption{Salida de ANOVA de un factor}
 \end{figure}
 
 Como p-value = 0.0000 es menor que la significación prefijada $\alpha$ = 0.05, se rechaza $H_{0}$ y se acepta que al menos un grupo de futbolistas de cierta edad, tiene un físico promedio diferente. 
@@ -218,9 +224,12 @@ Por último, es necesario verificar que se cumplen los supuestos del modelo:
 	\item Los residuos de cada tratamiento tienen la misma varianza $\sigma^{2}$
 \end{enumerate}
 
-\includegraphics[scale=0.5]{./imgs/anova_residuals.jpg}
-\includegraphics[scale=0.5]{./imgs/anova_qq.jpg}
-\includegraphics[scale=0.5]{./imgs/anova_hist.jpg}
+\begin{figure}[h]
+	\includegraphics[scale=0.5]{./imgs/anova_residuals.jpg}
+	\includegraphics[scale=0.5]{./imgs/anova_qq.jpg}
+	\includegraphics[scale=0.5]{./imgs/anova_hist.jpg}
+	\caption{Gráficos de Residuos}
+\end{figure}
 
 Como se puede observar en el gráfico estandarizado de residuos, tienen varianza constante, el qq-plot y el histograma de residuos
 muestran un comportamiento de forma normal, sin embargo, se realizarán las pruebas Shapiro-Wilcox, Bartlet y DurbinWatson para constatar el cumplimiento de los supuestos.
@@ -230,6 +239,7 @@ muestran un comportamiento de forma normal, sin embargo, se realizarán las prue
 	
 	\begin{figure}[h]
 		\includegraphics[scale=0.7]{./imgs/anova_shapiro.jpg}
+		\caption{Prueba de Normalidad}
 	\end{figure}
 	
 	El test de Shapiro-Wilcox no es significativo (p-value = 0.057 $>$ 0.05), no podemos rechazar $H_{0}$ por lo que se puede confirmar la hipótesis de normalidad en los residuos.
@@ -238,6 +248,7 @@ muestran un comportamiento de forma normal, sin embargo, se realizarán las prue
 	
 	\begin{figure}[h]
 		\includegraphics[scale=0.65]{./imgs/anova_bartlett.jpg}
+		\caption{Prueba de Homocedasticidad}
 	\end{figure}
 	
 	El test de Bartlett no es significativo (p-value = 0.97 $>$ 0.05), no podemos rechazar $H_{0}$ por lo que se puede confirmar la hipótesis de homogeneidad de las varianzas.
@@ -246,6 +257,7 @@ muestran un comportamiento de forma normal, sin embargo, se realizarán las prue
 	
 	\begin{figure}[h]
 		\includegraphics[scale=0.63]{./imgs/anova_dw.jpg}
+		\caption{Prueba de Independencia}
 	\end{figure}
 	
 	El test de Durbin-Watson no es significativo (p-value = 0.67 $>$ 0.05), no podemos rechazar $H_{0}$ por lo que se puede confirmar la hipótesis de independencia de los errores.
@@ -259,26 +271,32 @@ En primera instancia se hace un análisis de la correlación en la muestra utili
 
 \begin{figure}[h]
 	\includegraphics[scale=0.7]{./imgs/acp_correlation.jpg}
+	\caption{ Matriz de Correlación Gráfica}
 \end{figure}
+
+\newpage
 
 Se puede observar que no existe una relación entre las variables por lo tanto se procede a reducir dimensión. Para esto se seleccionan las componentes principales:
 
 \begin{figure}[h]
 	\includegraphics[scale=0.6]{./imgs/acp_summary.jpg}
+	\caption{Importancia de los componentes}
 \end{figure}
 
 Para la selección de las componentes principales se emplea la proporción acumulativa, la primera componente PC1 es 0.61364 , que solo explicaría un 61\% por lo que se necesita al menos otra componente para tener un valor mayor al 70\%. Si se incluye PC2 se alcanza un 86\%. De acuerdo con el criterio de Kaiser se tiene que las dos componentes con valores propios superiores a 1 son la primera y la segunda. Por lo que PC1 y PC2 son las componentes principales a elegir. Otra forma de corroborar dicha elección sería graficar todas las componentes principales como se muestra en la siguiente gráfica:
 
-\newpage
 
 \begin{figure}[h]
 	\includegraphics[scale=0.55]{./imgs/acp_plot.jpg}
+	\caption{Plot de Componentes Principales}
 \end{figure}
+
 
 Para interpretar los datos se debe calcular la matriz de valores propios y así se sabrá que variable es importante para cada componente y en qué medida:
 
 \begin{figure}[h]
 	\includegraphics[width=0.5\textwidth]{./imgs/acp_vp.jpg}
+	\caption{Matriz de valores propios $\lambda_{i}$}
 \end{figure}
 
 
@@ -301,6 +319,7 @@ La figura siguiente muestra un biplot para las 2 primeras componentes (PC1, PC2)
 
 \begin{figure}[h]
 	\includegraphics[scale=0.4]{./imgs/acp_biplot.png}
+	\caption{Biplot}
 \end{figure}
 
 \label{end}
