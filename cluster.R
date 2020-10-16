@@ -1,3 +1,6 @@
+# Cargar los datos de los jugadores
+players_19 <- read.csv('./players_19.csv')
+
 l<-length(players_19$sofifa_id)
 sub<-sample(1:l,2000)#Eleccion de una muestra de la poblaciÃ³n
 

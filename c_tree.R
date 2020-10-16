@@ -1,6 +1,10 @@
 library(rpart)
 library(rpart.plot)
 library(digest)
+
+# Cargar los datos de los jugadores
+players_19 <- read.csv('./players_19.csv')
+
 l<-length(players_19$sofifa_id)
 
 #Selección de un subconjunto de variables, manejo de valores faltantes,
